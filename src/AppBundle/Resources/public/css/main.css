@@ -1,0 +1,40 @@
+body {
+    background-image: url("../images/brick.png");
+}
+
+#menu {
+    height: 50px;
+    width: 90%;
+    margin-top: 50px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+#main {
+    width: 90%;
+    height: 80%;
+    margin: auto;
+}
+
+img {
+    padding-top: 50px;
+    margin: auto;
+    display: block;
+}
+
+.button {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+ul.dropdown-menu {
+    background-color: #CCCCCC;
+}
+
+ul.dropdown-menu li:hover ul.dropdown-menu {
+    display: block;
+    left: 100%;
+    top: 0;
+}
+
