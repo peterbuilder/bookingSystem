@@ -10,41 +10,12 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 
 class CalendarController extends Controller
 {
-    /**
-     * @Route("/{month}/{year}")
-     * @Template("Calendar/showCalendar.html.twig")
-     */
-    public function getParametersAction($month, $year)
-    {
-        //Number of days in month
-        $numberOfDays = cal_days_in_month(CAL_GREGORIAN, $month, $year);
-
-        //Name of first day in week. If sunday: $dayOfWeek = 7
-        $date = gregoriantojd($month, 1, $year);
-        if(jddayofweek($date, 0) != 0) {
-            $dayOfWeek = jddayofweek($date, 0);
-        }
-        else {
-            $dayOfWeek = 7;
-        }
-
-        //Number of weeks in month
-        $numberOfWeeks = $this->numOfWeeks($month, $year);
-
-        return [
-            "numberOfDays" => $numberOfDays,
-            "dayOfWeek" => $dayOfWeek,
-            "month" => $month,
-            "year" => $year,
-            "numberOfWeeks" =>$numberOfWeeks - 1
-        ];
-    }
-
     /**
      * @Route("/show/{day}/{month}/{year}")
      */
@@ -75,9 +46,39 @@ class CalendarController extends Controller
         return $numberOfWeeks;
     }
 
-    private function generateCalendarToAjaxAction()
-    {
 
+    /**
+     * @Route("/ajax/calendar/{year}/{month}", name="ajax_calendar")
+     */
+    public function generateCalendarToAjaxAction($year, $month)
+    {
+        //Number of days in month
+        $numberOfDays = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+
+        //Name of first day in week. If sunday: $dayOfWeek = 7
+        $date = gregoriantojd($month, 1, $year);
+        if(jddayofweek($date, 0) != 0) {
+            $dayOfWeek = jddayofweek($date, 0);
+        }
+        else {
+            $dayOfWeek = 7;
+        }
+
+        //Number of weeks in month
+        $numberOfWeeks = $this->numOfWeeks($month, $year);
+
+        $calendar = $this->renderView(
+            'test.html.twig', [
+                "numberOfDays" => $numberOfDays,
+                "dayOfWeek" => $dayOfWeek,
+                "month" => $month,
+                "year" => $year,
+                "numberOfWeeks" => $numberOfWeeks - 1
+            ]
+        );
+
+        return new JsonResponse([
+            "calendar" => $calendar
+        ]);
     }
 }
-
