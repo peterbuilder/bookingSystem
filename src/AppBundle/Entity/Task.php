@@ -29,21 +29,21 @@ class Task
     private $type;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="start", type="datetime")
+     * @ORM\Column(name="start", type="string")
      */
     private $start;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="end", type="datetime")
+     * @ORM\Column(name="end", type="string")
      */
     private $end;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Task", inversedBy="tasks")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="tasks")
      */
     private $user;
 
@@ -53,7 +53,9 @@ class Task
     public function getUser()
     {
         return $this->user;
-    }/**
+    }
+
+    /**
      * @param mixed $user
      */
     public function setUser($user)
