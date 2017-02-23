@@ -1,0 +1,43 @@
+<table border="1">
+    <tr>
+        <td>Pon.</td>
+        <td>Wt.</td>
+        <td>Śr.</td>
+        <td>Czw.</td>
+        <td>Pt.</td>
+        <td>Sob.</td>
+        <td>Nd.</td>
+    </tr>
+    {# Generate first row of the calendar #}
+    <tr>
+        {% set day = 1 %}
+        {% for i in 1..7 %}
+            {% if i >= dayOfWeek %}
+                <td><a href="{{ path('app_calendar_showday'
+                    , {'day': day, 'month': month, 'year': year}
+                    ) }}"> {{ day }} </a></td>
+                {% set day = day + 1 %}
+            {% else %}
+                <td></td>
+            {% endif %}
+        {% endfor %}
+    </tr>
+
+    {# Generate rest rows of the calendar #}
+    {% set row = 1 %}
+    {% for row in 1..numberOfWeeks %}
+        <tr>
+            {% for j in 1..7 %}
+                {% if day <= numberOfDays %}
+                    <td><a href="{{ path('app_calendar_showday'
+                        , {'day': day, 'month': month, 'year': year}
+                        ) }}"> {{ day }} </a></td>
+                    {% set day = day + 1 %}
+                {% else %}
+                    <td></td>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    {% endfor %}
+
+</table>
