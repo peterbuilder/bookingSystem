@@ -95,7 +95,11 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-{% block body %}{% endblock %}
+{% block body %}
+<div id="main">
+    {% block main %}{% endblock %}
+</div>
+{% endblock %}
 {% block javascripts %}{% endblock %}
 <script
         src="https://code.jquery.com/jquery-2.2.4.min.js"
