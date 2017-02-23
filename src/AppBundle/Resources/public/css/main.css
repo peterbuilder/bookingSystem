@@ -35,6 +35,5 @@ ul.dropdown-menu {
 ul.dropdown-menu li:hover ul.dropdown-menu {
     display: block;
     left: 100%;
-    top: 0;
 }
 
