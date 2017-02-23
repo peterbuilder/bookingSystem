@@ -29,23 +29,16 @@ class Task
     private $type;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="userId", type="integer")
-     */
-    private $userId;
-
-    /**
      * @var \DateTime
      *
-     * @ORM\Column(name="start", type="date")
+     * @ORM\Column(name="start", type="datetime")
      */
     private $start;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="end", type="date")
+     * @ORM\Column(name="end", type="datetime")
      */
     private $end;
 
