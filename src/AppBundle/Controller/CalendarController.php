@@ -68,7 +68,7 @@ class CalendarController extends Controller
         $numberOfWeeks = $this->numOfWeeks($month, $year);
 
         $calendar = $this->renderView(
-            'test.html.twig', [
+            'Calendar/showCalendar.html.twig', [
                 "numberOfDays" => $numberOfDays,
                 "dayOfWeek" => $dayOfWeek,
                 "month" => $month,
