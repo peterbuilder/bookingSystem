@@ -4,10 +4,12 @@
 
     <form action="{{ path("app_task_addtask") }}" method="post">
         <select  name="serviceType">
-            <option value="menHaircut">Strzyżenie męskie</option>
-            <option value="womenHaircut">Strzyżenie damskie</option>
+            <option value="manHaircut">Strzyżenie męskie</option>
+            <option value="womanHaircut">Strzyżenie damskie</option>
             <option value="permanent">Trwała</option>
         </select>
+        <input type="time" name="startTime" placeholder="Godzina (format: hh:mm)">
+        <input type="text" value="{{ year }}-{{ month }}-{{ day }}" name="date" readonly>
         <input type="submit" value="Wyślij">
     </form>
 
