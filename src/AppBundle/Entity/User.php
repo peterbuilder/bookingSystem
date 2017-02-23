@@ -51,7 +51,7 @@ class User
     private $password;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle/Entity/Task", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Task", mappedBy="user")
      */
     private $tasks;
 
