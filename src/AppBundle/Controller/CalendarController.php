@@ -18,10 +18,17 @@ class CalendarController extends Controller
 {
     /**
      * @Route("/show/{day}/{month}/{year}")
+     * @Template("AppBundle:Calendar:showDay.html.twig")
      */
     public function showDayAction($day, $month, $year)
     {
-        return new Response("Dzień: " . $day . " Miesiąc: " . $month . " Rok: " . $year);
+        $this->denyAccessUnlessGranted('ROLE_USER', null, 'Access denied');
+
+        return [
+            'day' => $day,
+            'month' => $month,
+            'year' => $year
+        ];
     }
 
     //Count weeks in month
