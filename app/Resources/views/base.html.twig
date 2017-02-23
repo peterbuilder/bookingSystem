@@ -1,98 +1,126 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link href="{{ asset('bundles/framework/css/main.css') }}" rel="stylesheet" type="text/css" />
+<head>
+    <meta charset="UTF-8"/>
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+    <link href="{{ asset('bundles/framework/css/main.css') }}" rel="stylesheet" type="text/css"/>
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand button" href="{{ path('app_default_index') }}">Strona Główna</a>
-            </div>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand button" href="{{ path('app_default_index') }}">Strona Główna</a>
+        </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="" class="dropdown-toggle button" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Rezerwuj <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">2016</a>
-                                <ul class="dropdown-menu">
-                                    {% set months = {
-                                        1: 'Styczeń',
-                                        2: 'Luty',
-                                        3: 'Marzec',
-                                        4: 'Kwiecień',
-                                        5: 'Maj',
-                                        6: 'Czerwiec',
-                                        7: 'Lipiec',
-                                        8: 'Sierpień',
-                                        9: 'Wrzesień',
-                                        10: 'Październik',
-                                        11: 'Listopad',
-                                        12: 'Grudzień',
-                                    } %}
-                                    {% for i in 1..12 %}
-                                    <li><a href="{{ path('app_calendar_getparameters',
-                                        {'month': i , 'year':2016}) }}">{{ months[i] }}</a></li>
-                                    {% endfor %}
-                                </ul>
-                            </li>
-                            <li><a href="#">2017</a>
-                                <ul class="dropdown-menu">
-                                    {% for i in 1..12 %}
-                                        <li><a href="{{ path('app_calendar_getparameters',
-                                            {'month': i , 'year':2017}) }}">{{ months[i] }}</a></li>
-                                    {% endfor %}
-                                </ul>
-                            </li>
-                            <li><a href="#">2018</a>
-                                <ul class="dropdown-menu">
-                                    {% for i in 1..12 %}
-                                        <li><a href="{{ path('app_calendar_getparameters',
-                                            {'month': i , 'year':2018}) }}">{{ months[i] }}</a></li>
-                                    {% endfor %}
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle button" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-        <script
-                src="https://code.jquery.com/jquery-2.2.4.min.js"
-                integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-                crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        <script src="{{ asset('bundles/framework/javascript/main.js') }}"></script>
-    </body>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle button" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Rezerwuj <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">2016</a>
+                            <ul class="dropdown-menu">
+                                {% set months = {
+                                1: 'Styczeń',
+                                2: 'Luty',
+                                3: 'Marzec',
+                                4: 'Kwiecień',
+                                5: 'Maj',
+                                6: 'Czerwiec',
+                                7: 'Lipiec',
+                                8: 'Sierpień',
+                                9: 'Wrzesień',
+                                10: 'Październik',
+                                11: 'Listopad',
+                                12: 'Grudzień',
+                                } %}
+                                {% for i in 1..12 %}
+                                    <li>
+                                        <a href="#" data-year="2016" data-month="{{ i }}">{{ months[i] }}</a>
+                                    </li>
+
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        <li><a href="#">2017</a>
+                            <ul class="dropdown-menu">
+                                {% for i in 1..12 %}
+                                    <li>
+                                        <a href="#" data-year="2017" data-month="{{ i }}">{{ months[i] }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        <li><a href="#">2018</a>
+                            <ul class="dropdown-menu">
+                                {% for i in 1..12 %}
+                                    <li>
+                                        <a href="#" data-year="2018" data-month="{{ i }}">{{ months[i] }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle button" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+{% block body %}{% endblock %}
+{% block javascripts %}{% endblock %}
+<script
+        src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+<script>
+    $(function () {
+        $('ul.dropdown-menu li a').on('click', function () {
+            var monthA = $(this).data('month');
+            var yearA = $(this).data('year');
+            var url = "{{ path('ajax_calendar', {'month': 'monthA', 'year': 'yearA'}) }}";
+            url = url.replace("monthA", monthA);
+            url = url.replace("yearA", yearA);
+            console.log(url);
+            $.ajax({
+                url: url
+            }).done(function (data) {
+                $('body').append(data.calendar);
+            });
+        })
+    })
+</script>
+
+</body>
 </html>
