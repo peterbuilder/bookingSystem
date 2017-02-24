@@ -12,6 +12,9 @@
         <input type="text" value="{{ year }}-{{ month }}-{{ day }}" name="date" readonly>
         <input type="submit" value="Wyślij">
     </form>
+    <form action="{{ path('app_task_gettasks', {'year': year, 'month': month, 'day': day}) }}">
+        <input type="submit" value="Pokaż plan na ten dzień">
+    </form>
 
 
 {% endblock %}
