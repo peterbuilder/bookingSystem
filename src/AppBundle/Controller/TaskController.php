@@ -10,12 +10,15 @@ namespace AppBundle\Controller;
 
 
 
+use AppBundle\AppBundle;
 use AppBundle\Entity\Task;
+use AppBundle\Repository\taskRepository;
 use DateInterval;
 use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -36,27 +39,26 @@ class TaskController extends Controller
         $date = $request->request->get('date');
         $date = $this->checkDateFormat($date);
         $startTime = $date . ' ' . $start . ':00';
-        $time = new DateTime($startTime);
-
-        switch ($serviceType) {
-            case 'manHaircut':
-                    $time->add(new DateInterval('PT15M'));
-                    $endTime = $time->format('Y-m-d H:i:s');
-                break;
-
-            case 'womanHaircut':
-                    $time->add(new DateInterval('PT30M'));
-                    $endTime = $time->format('Y-m-d H:i:s');
-                break;
-
-            case 'permanent':
-                    $time->add(new DateInterval('PT1H30M'));
-                    $endTime = $time->format('Y-m-d H:i:s');
-                break;
-        }
+        $endTime = $this->addServiceTime($startTime, $serviceType);
 
         $this->setTask($serviceType, $startTime, $endTime);
-        return ['endTime' => $startTime,'date'=>$date];
+
+        return [];
+    }
+
+    /**
+     * @Route ("/tasks/{year}/{month}/{day}")
+     * @Template()
+     */
+    public function getTasksAction($year, $month, $day)
+    {
+        $date = $year.'-'.$month.'-'.$day;
+        $date = $this->checkDateFormat($date);
+        $date = $date.'%';
+        $em = $this->getDoctrine()->getManager();
+        $tasks = $em->getRepository('AppBundle:Task')->findTaskByDate($date);
+
+        return ['tasks' => $tasks];
     }
 
     //Change day and month format to 0x-0x
@@ -78,7 +80,6 @@ class TaskController extends Controller
     {
         $task = new Task();
         $task->setUser($this->getUser());
-        $task->setUserId($this->getUser()->getId());
         $task->setType($serviceType);
         $task->setStart($startTime);
         $task->setEnd($endTime);
@@ -87,4 +88,29 @@ class TaskController extends Controller
         $em->persist($task);
         $em->flush();
     }
+
+    private function addServiceTime($startTime, $serviceType)
+    {
+        $time = new DateTime($startTime);
+
+        switch ($serviceType) {
+            case 'manHaircut':
+                $time->add(new DateInterval('PT15M'));
+                break;
+
+            case 'womanHaircut':
+                $time->add(new DateInterval('PT30M'));
+                break;
+
+            case 'permanent':
+                $time->add(new DateInterval('PT1H30M'));
+                break;
+        }
+
+        $endTime = $time->format('Y-m-d H:i:s');
+
+        return $endTime;
+    }
+
+
 }
