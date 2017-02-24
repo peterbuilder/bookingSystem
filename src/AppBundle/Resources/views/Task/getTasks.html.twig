@@ -1,0 +1,4 @@
+<body background="/bundles/app/image/brick.png"></body>
+{% for task in tasks %}
+{{ task.user }} --- {{ task.type }} --- {{ task.start }} --- {{ task.end }}<br>
+{% endfor %}
