@@ -12,4 +12,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class taskRepository extends EntityRepository
 {
+   public function findTaskByDate($date)
+   {
+       $tasks = $this->getEntityManager()->createQuery(
+           "SELECT t FROM AppBundle:Task t WHERE t.start LIKE :date"
+       )->setParameter("date", $date)->getResult();
+
+       return $tasks;
+   }
+
 }
