@@ -97,29 +97,6 @@ class Task
     }
 
     /**
-     * Set userId
-     *
-     * @param integer $userId
-     * @return task
-     */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Get userId
-     *
-     * @return integer 
-     */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
-
-    /**
      * Set start
      *
      * @param \DateTime $start
