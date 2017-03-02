@@ -41,7 +41,9 @@ class TaskController extends Controller
         $startTime = $date . ' ' . $start . ':00';
         $endTime = $this->addServiceTime($startTime, $serviceType);
 
-        $this->setTask($serviceType, $startTime, $endTime);
+        if(!$this->isDateBusy($date, $startTime)) {
+            $this->setTask($serviceType, $startTime, $endTime);
+        }
 
         return [];
     }
@@ -57,6 +59,7 @@ class TaskController extends Controller
         $date = $date.'%';
         $em = $this->getDoctrine()->getManager();
         $tasks = $em->getRepository('AppBundle:Task')->findTaskByDate($date);
+
 
         return ['tasks' => $tasks];
     }
@@ -74,6 +77,25 @@ class TaskController extends Controller
         $date = implode('-', $dateArray);
 
         return $date;
+    }
+
+    private function isDateBusy($date, $startCurrentTask)
+    {
+        $a=0;
+        $date = $date . '%';
+        $em = $this->getDoctrine()->getManager();
+        $tasks = $em->getRepository('AppBundle:Task')->findTaskByDate($date);
+
+        foreach($tasks as $key => $task) {
+            $start = $task->getStart();
+            $end = $task->getEnd();
+
+            if(($startCurrentTask >= $start) && ($startCurrentTask < $end)) {
+                return true;
+            }
+
+        }
+        return false;
     }
 
     private function setTask($serviceType, $startTime, $endTime)
