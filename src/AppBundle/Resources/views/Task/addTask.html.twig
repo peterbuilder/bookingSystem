@@ -1,1 +1,10 @@
-<meta http-equiv="refresh" content="1; URL={{ path('app_default_index') }}">
+<meta http-equiv="refresh" content="4; URL={{ path('app_default_index') }}">
+<body background="/bundles/app/image/brick.png"></body>
+
+{% if task %}
+    <h1 style="color: #6b9311">Rezerwacja przebiegła pomyślnie!</h1>
+{% else %}
+    <h1 style="color: #AA3333">Ta godzina jest już zajęta. Spróbuj jeszcze raz zarezerwować termin.</h1>
+{% endif %}
+
+<h2>Za chwile nastąpi przekierowanie do strony głównej</h2>
