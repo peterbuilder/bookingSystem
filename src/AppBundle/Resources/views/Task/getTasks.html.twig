@@ -1,4 +1,21 @@
-<body background="/bundles/app/image/brick.png"></body>
-{% for task in tasks %}
-{{ task.user }} --- {{ task.type }} --- {{ task.start }} --- {{ task.end }}<br>
-{% endfor %}
+{% extends 'base.html.twig' %}
+{% block body %}
+    <table class="task-table">
+        <tr>
+            <th>Nazwa użytkownika</th>
+            <th>Typ usługi</th>
+            <th>Rozpoczęcie usługi</th>
+            <th>Zakończenie usługi</th>
+        </tr>
+
+    {% for task in tasks %}
+        <tr>
+            <td>{{ task.user }}</td>
+            <td>{{ task.type }}</td>
+            <td>{{ task.start }}</td>
+            <td>{{ task.end }}</td>
+        </tr>
+    {% endfor %}
+
+    </table>
+{% endblock body %}
