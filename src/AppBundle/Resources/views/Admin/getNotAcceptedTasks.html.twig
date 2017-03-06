@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <table class="task-table">
+        <tr>
+            <th>Id</th>
+            <th>Nazwa użytkownika</th>
+            <th>Typ usługi</th>
+            <th>Rozpoczęcie usługi</th>
+            <th>Zakończenie usługi</th>
+            <th>Czy zaakcptowane</th>
+        </tr>
+
+        {% for task in tasks %}
+            <tr>
+                <td>{{ task.id }}</td>
+                <td>{{ task.user }}</td>
+                <td>{{ task.type }}</td>
+                <td>{{ task.start }}</td>
+                <td>{{ task.end }}</td>
+                <td>{{ task.isAccepted }}</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+{% endblock body %}
