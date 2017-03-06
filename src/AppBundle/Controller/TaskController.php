@@ -108,6 +108,7 @@ class TaskController extends Controller
         $task->setType($serviceType);
         $task->setStart($startTime);
         $task->setEnd($endTime);
+        $task->setIsAccepted(0);
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($task);
