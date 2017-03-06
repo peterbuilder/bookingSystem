@@ -7,7 +7,7 @@
             <th>Typ usługi</th>
             <th>Rozpoczęcie usługi</th>
             <th>Zakończenie usługi</th>
-            <th>Czy zaakcptowane</th>
+            <th>Akceptuj</th>
         </tr>
 
         {% for task in tasks %}
@@ -17,7 +17,7 @@
                 <td>{{ task.type }}</td>
                 <td>{{ task.start }}</td>
                 <td>{{ task.end }}</td>
-                <td>{{ task.isAccepted }}</td>
+                <td><a href="{{ path('app_admin_accepttask', {'id': task.id}) }}">Akceptuj</a></td>
             </tr>
         {% endfor %}
 
