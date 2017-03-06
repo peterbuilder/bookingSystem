@@ -48,6 +48,27 @@ class Task
     private $user;
 
     /**
+     * @ORM\Column(name="is_accepted", type="smallint", options={"default":0})
+     */
+    private $isAccepted;
+
+    /**
+     * @return mixed
+     */
+    public function getIsAccepted()
+    {
+        return $this->isAccepted;
+    }
+
+    /**
+     * @param mixed $isAccepted
+     */
+    public function setIsAccepted($isAccepted)
+    {
+        $this->isAccepted = $isAccepted;
+    }
+
+    /**
      * @return mixed
      */
     public function getUser()
