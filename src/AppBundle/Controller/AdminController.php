@@ -25,6 +25,19 @@ class AdminController extends Controller
         return ['tasks' => $tasks];
     }
 
+    /**
+     * @Route("/acceptTask/{id}")
+     */
+    public function acceptTaskAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $task = $em->getRepository('AppBundle:Task')->findOneBy(array('isAccepted' => 0, 'id'=>$id));
+        $task->setIsAccepted(1);
+        $em->persist($task);
+        $em->flush();
+
+        return new Response();
+    }
 
 
 }
