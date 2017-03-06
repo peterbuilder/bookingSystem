@@ -2,14 +2,9 @@
 
 namespace AppBundle\Controller;
 
-
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Doctrine\DBAL\Query\QueryBuilder;
-use Symfony\Component\HttpFoundation\Response;
 
 class AdminController extends Controller
 {
@@ -19,6 +14,7 @@ class AdminController extends Controller
      */
     public function getNotAcceptedTasksAction()
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access Denied');
         $em = $this->getDoctrine()->getManager();
         $tasks = $em->getRepository('AppBundle:Task')->findBy(array('isAccepted' => 0));
 
@@ -27,16 +23,18 @@ class AdminController extends Controller
 
     /**
      * @Route("/acceptTask/{id}")
+     * @Template()
      */
     public function acceptTaskAction($id)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access Denied');
         $em = $this->getDoctrine()->getManager();
         $task = $em->getRepository('AppBundle:Task')->findOneBy(array('isAccepted' => 0, 'id'=>$id));
         $task->setIsAccepted(1);
         $em->persist($task);
         $em->flush();
 
-        return new Response();
+        return [];
     }
 
 
