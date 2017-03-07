@@ -9,12 +9,14 @@
         </tr>
 
     {% for task in tasks %}
+        {% if task.isAccepted == 1 %}
         <tr>
             <td>{{ task.user }}</td>
             <td>{{ task.type }}</td>
             <td>{{ task.start }}</td>
             <td>{{ task.end }}</td>
         </tr>
+            {% endif %}
     {% endfor %}
 
     </table>
