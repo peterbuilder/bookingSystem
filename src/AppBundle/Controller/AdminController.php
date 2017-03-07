@@ -16,7 +16,7 @@ class AdminController extends Controller
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access Denied');
         $em = $this->getDoctrine()->getManager();
-        $tasks = $em->getRepository('AppBundle:Task')->findBy(array('isAccepted' => 0));
+        $tasks = $em->getRepository('AppBundle:Task')->findBy(array('isAccepted' => 1));
 
         return ['tasks' => $tasks];
     }
